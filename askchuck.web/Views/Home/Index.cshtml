@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Chuck Norris Facts";
+}
+
+<div class="jumbotron col-sm-12 text-center">
+    <img src="../images/chuck.png" class="img-fluid" alt="chuck norris image" style="width:40%;">
+    <br /><br />
+    <p class="lead">@ViewBag.Fact</p>
+    <hr>
+    <a class="btn btn-primary btn-lg" role="button" asp-area="" asp-controller="Home" asp-action="RandomFact">Ask Chuck</a>
+</div>
