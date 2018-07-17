@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "askchuck.web", "askchuck.web\askchuck.web.csproj", "{B00AC6A3-06BA-49ED-AB34-B62F253E98D1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "askchuck.api", "askchuck.api\askchuck.api.csproj", "{799FF6A6-C5E2-417A-86C1-0A62A97ADB00}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B00AC6A3-06BA-49ED-AB34-B62F253E98D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B00AC6A3-06BA-49ED-AB34-B62F253E98D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B00AC6A3-06BA-49ED-AB34-B62F253E98D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{799FF6A6-C5E2-417A-86C1-0A62A97ADB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{799FF6A6-C5E2-417A-86C1-0A62A97ADB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{799FF6A6-C5E2-417A-86C1-0A62A97ADB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{799FF6A6-C5E2-417A-86C1-0A62A97ADB00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

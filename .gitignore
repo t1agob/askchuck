@@ -6,3 +6,6 @@
 /askchuck.web/bin/Debug/netcoreapp2.0
 /askchuck.web/obj
 /askchuck.web/askchuck.web.csproj.user
+/askchuck.api/bin/Debug/netcoreapp2.0
+/askchuck.api/obj
+*.user
