@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +10,38 @@ namespace chuck.api.Controllers
     [Route("api/[controller]")]
     public class QuotesController : Controller
     {
+        static HttpClient client = new HttpClient();
+
         // GET api/values
         [HttpGet]
-        public string Get()
+        public async Task<string> Get(string category = null)
         {
-            Random rnd = new Random();
-            int index = rnd.Next(quoteList.Count());
-
-            return quoteList[index];
+            return await GenerateQuoteAsync(category);
         }
 
-        List<string> quoteList = new List<string>(){
+        public async Task<string> GenerateQuoteAsync(string category)
+        {
+            
+            Random rnd = new Random();
+            int index = rnd.Next(defaultQuoteList.Count());
+            
+            return  category == null 
+                    ? defaultQuoteList[index]
+                    : await CallChuckAPI(category);
+        }
+
+        public async Task<string> CallChuckAPI(string category)
+        {
+            HttpResponseMessage response = await client.GetAsync($"https://api.chucknorris.io/jokes/random?category={category}");
+            if (!response.IsSuccessStatusCode)
+            {
+                return "Hmmm...Chuck Norris seems to have destroyed the Internet!";
+            }
+
+            return await response.Content.ReadAsStringAsync();
+        }
+
+        List<string> defaultQuoteList = new List<string>(){
             "Chuck Norris' OSI network model has only one layer - Physical.",
             "Chuck Norris finished World of Warcraft.",
             "The Chuck Norris Eclipse plugin made alien contact.",

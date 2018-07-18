@@ -1,4 +1,5 @@
-﻿@{
+﻿@model askchuck.web.Models.FactCategoryList
+@{
     ViewData["Title"] = "Chuck Norris Facts";
 }
 
@@ -6,27 +7,34 @@
     <img src="../images/chuck.png" class="img-fluid" alt="chuck norris image" style="width:40%;">
     <br /><br />
 
+
+    @using (Html.BeginForm())
+    {
           <div class="btn-group btn-group-justified" data-toggle="buttons">
-              <label class="btn btn-danger active">
-                  <input type="checkbox" autocomplete="off" checked> Geek
-              </label>
-              <label class="btn btn-warning">
-                  <input type="checkbox" autocomplete="off"> Science
-              </label>
-              <label class="btn btn-info">
-                  <input type="checkbox" autocomplete="off"> Music
-              </label>
-              <label class="btn btn-success">
-                  <input type="checkbox" autocomplete="off"> Movies
-              </label>
-              <label class="btn btn-primary">
-                  <input type="checkbox" autocomplete="off"> Travel
-              </label>
-          </div>
+              @for (int i = 0; i < Model.FactCategories.Count; i++)
+              {
+                  @if (Model.SelectedCategory == Model.FactCategories[i].Text)
+                  {
+                      <label class="btn btn-@Model.FactCategories[i].ButtonStyle active focus">
+                          @Html.RadioButtonFor(m => m.SelectedCategory, Model.FactCategories[i].Text, new { @name = "categories" })
+                          @Model.FactCategories[i].Text<br />
+                      </label>
+                  }
+                  else
+                  {
+                      <label class="btn btn-@Model.FactCategories[i].ButtonStyle">
+                          @Html.RadioButtonFor(m => m.SelectedCategory, Model.FactCategories[i].Text, new { @name = "categories" })
+                          @Model.FactCategories[i].Text<br />
+                      </label>
+                  }
+              }
+          </div>         
 
-    <br /><br />
+        <br /><br />
 
-    <p class="lead">@ViewBag.Fact</p>
-    <hr>
-    <a class="btn btn-primary btn-lg" role="button" asp-area="" asp-controller="Home" asp-action="RandomFact">Ask Chuck</a>
+        <p class="lead">@ViewBag.Fact</p>
+        <hr>
+        
+        <input type="submit" value="Ask Chuck" class="btn btn-primary btn-lg" />
+    }
 </div>
