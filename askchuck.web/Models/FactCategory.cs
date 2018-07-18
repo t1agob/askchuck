@@ -10,6 +10,8 @@ namespace askchuck.web.Models
         public string Text { get; set; }
 
         public string ButtonStyle { get; set; }
+
+        public string Category { get; set; }
     }
 
     public class FactCategoryList

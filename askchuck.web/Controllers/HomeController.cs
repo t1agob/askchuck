@@ -29,7 +29,9 @@ namespace chuck.web.Controllers
         [HttpPost]
         public async Task<ActionResult> Index(FactCategoryList Obj)
         {
-            HttpResponseMessage response = await client.GetAsync("http://chuckapi/api/quotes");
+            string url = (Obj.SelectedCategory == "none" || Obj.SelectedCategory == null) ? $"http://askchuckapi/api/quotes" : $"http://askchuckapi/api/quotes?category={Obj.SelectedCategory}";
+            
+            HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 ViewBag.Fact = await response.Content.ReadAsStringAsync();
@@ -52,11 +54,12 @@ namespace chuck.web.Controllers
             {
                 FactCategories = new List<FactCategory>()
                 {
-                    new FactCategory{ Text = "Geek", ButtonStyle = "danger" },
-                    new FactCategory{ Text = "Science", ButtonStyle = "warning" },
-                    new FactCategory{ Text = "Music", ButtonStyle = "info" },
-                    new FactCategory{ Text = "Movies", ButtonStyle = "success" },
-                    new FactCategory{ Text = "Travel", ButtonStyle = "primary" }
+                    new FactCategory{ Text = "None", Category = "none", ButtonStyle = "default" },
+                    new FactCategory{ Text = "Geek", Category = "dev", ButtonStyle = "danger" },
+                    new FactCategory{ Text = "Science", Category = "science", ButtonStyle = "warning" },
+                    new FactCategory{ Text = "Sports", Category = "sport", ButtonStyle = "info" },
+                    new FactCategory{ Text = "Movies", Category = "movies", ButtonStyle = "success" },
+                    new FactCategory{ Text = "History", Category = "history", ButtonStyle = "primary" }
                 };
             }            
         }

@@ -1,0 +1,16 @@
+FROM microsoft/aspnetcore-build:2.0
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+
+EXPOSE 80
+
+WORKDIR /src
+COPY ["askchuck.sln", "./"]
+COPY ["askchuck.web/askchuck.web.csproj", "askchuck.web/"]
+
+RUN dotnet restore -nowarn:msb3202,nu1503
+COPY . .
+WORKDIR "/src/askchuck.web"
+RUN dotnet build "askchuck.web.csproj"
+
+CMD ["dotnet", "run", "--no-restore", "--no-build", "--no-launch-profile"]

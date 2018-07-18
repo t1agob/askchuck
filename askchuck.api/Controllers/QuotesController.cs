@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using askchuck.api.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace chuck.api.Controllers
 {
@@ -12,7 +14,7 @@ namespace chuck.api.Controllers
     {
         static HttpClient client = new HttpClient();
 
-        // GET api/values
+        // GET api/quotes
         [HttpGet]
         public async Task<string> Get(string category = null)
         {
@@ -38,7 +40,10 @@ namespace chuck.api.Controllers
                 return "Hmmm...Chuck Norris seems to have destroyed the Internet!";
             }
 
-            return await response.Content.ReadAsStringAsync();
+            var json = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<ChuckApiResult>(json);
+
+            return result.value;
         }
 
         List<string> defaultQuoteList = new List<string>(){
